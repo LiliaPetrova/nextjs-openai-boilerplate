@@ -1,36 +1,46 @@
 // file: /prompts/promptUtils.js
+
 export function getSystemPrompt() {
   return {
     role: "system",
-    content: "You are a helpful assistant that specializes in generating creative pet names.",
+    content: "You are a helpful assistant that specializes in generating educational flashcards for any topic.",
   };
 }
 
 export function getUserPrompt(input) {
   return {
     role: "user",
-    content: `Generate a creative pet name and short description for a ${input}.`,
+    content: `Generate 5 educational flashcards for the topic: ${input}. Each flashcard should have a clear question and a concise, factual answer.`,
   };
 }
 
 export function getFunctions() {
   return [
     {
-      name: "generate_pet_name",
-      description: "Generate a pet name for an animal.",
+      name: "generate_flashcards",
+      description: "Generate educational flashcards for a given topic.",
       parameters: {
         type: "object",
         properties: {
-          animalPetName: {
-            type: "string",
-            description: "The generated pet name for the animal",
-          },
-          description: {
-            type: "string",
-            description: "The generated explanation of the pet name",
+          flashcards: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                question: {
+                  type: "string",
+                  description: "The question for the flashcard.",
+                },
+                answer: {
+                  type: "string",
+                  description: "The answer for the flashcard.",
+                },
+              },
+              required: ["question", "answer"],
+            },
           },
         },
-        "required": ["animalPetName", "description"]
+        required: ["flashcards"],
       },
     },
   ];

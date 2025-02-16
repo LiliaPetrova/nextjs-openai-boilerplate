@@ -39,7 +39,7 @@ export default async function (req, res) {
 
     // Call the OpenAI API to create a chat completion
     const completion = await openai.createChatCompletion({
-      "model": "gpt-3.5-turbo-0613",
+      "model": "gpt-3.5-turbo",
       "messages": messages,
       "functions": functions,
       temperature: 1,
